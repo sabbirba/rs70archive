@@ -71,7 +71,7 @@ function buildEntries(baseDir, prefix) {
         const relPath = relRoot ? `${relRoot}/${item.name}` : item.name;
         const prefixedPath = `${prefix}${relPath}`;
         const ext = path.extname(item.name).replace(/^\./, "");
-        if (!relRoot && ROOT_IMAGE_EXTENSIONS.has(ext.toLowerCase())) {
+        if (!relRoot) {
           continue;
         }
         if (ONLY_WEBP && ext.toLowerCase() !== "webp") {

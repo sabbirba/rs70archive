@@ -2,12 +2,12 @@
   "developer": "Sabbir Bin Abbas",
   "devemail": "mail@sabbirba.com",
   "devfb": "https://www.facebook.com/Sabbirba10",
-  "generated_at": "2025-12-27T09:52:27.315Z",
+  "generated_at": "2025-12-27T09:56:40.348Z",
   "base_url": "https://cdn.jsdelivr.net/gh/sabbirba/rs70archive@main/",
   "stats": {
     "folders": 45,
-    "files": 3871,
-    "total_bytes": 21378863167
+    "files": 3865,
+    "total_bytes": 21377965021
   },
   "entries": [
     {
@@ -27064,48 +27064,6 @@
       "bytes": 17889433,
       "ext": "JPG",
       "cdn_path": "House%20Championship/Tasmiah%20Tabassum%20/DSC09436.JPG"
-    },
-    {
-      "type": "file",
-      "path": "index.html",
-      "bytes": 20135,
-      "ext": "html",
-      "cdn_path": "index.html"
-    },
-    {
-      "type": "file",
-      "path": "package-lock.json",
-      "bytes": 16993,
-      "ext": "json",
-      "cdn_path": "package-lock.json"
-    },
-    {
-      "type": "file",
-      "path": "package.json",
-      "bytes": 388,
-      "ext": "json",
-      "cdn_path": "package.json"
-    },
-    {
-      "type": "file",
-      "path": "README.md",
-      "bytes": 277,
-      "ext": "md",
-      "cdn_path": "README.md"
-    },
-    {
-      "type": "file",
-      "path": "site.webmanifest",
-      "bytes": 400,
-      "ext": "webmanifest",
-      "cdn_path": "site.webmanifest"
-    },
-    {
-      "type": "file",
-      "path": "sitemap.json",
-      "bytes": 859953,
-      "ext": "json",
-      "cdn_path": "sitemap.json"
     },
     {
       "type": "folder",
