@@ -98,22 +98,22 @@
       }
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 18px;
         justify-items: center;
       }
       .section {
-        margin-bottom: 36px;
+        margin-bottom: 24px;
       }
       .section-title {
-        margin: 8px 0 16px;
+        margin: 6px 0 10px;
         font-size: 20px;
         letter-spacing: 0.5px;
       }
       .controls {
         display: flex;
         justify-content: center;
-        margin: 22px 0 0;
+        margin: 16px 0 0;
       }
       .load-more {
         border: 0;
@@ -144,14 +144,14 @@
       .card {
         background: var(--card);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 14px;
-        padding: 10px 12px;
-        min-height: 140px;
+        border-radius: 16px;
+        padding: 14px 16px;
+        min-height: 180px;
         display: flex;
         flex-direction: column;
         gap: 10px;
         width: 100%;
-        max-width: 420px;
+        max-width: 520px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         transition: transform 200ms ease, box-shadow 200ms ease;
       }
@@ -161,8 +161,8 @@
       }
       .preview-frame {
         width: 100%;
-        aspect-ratio: 4 / 3;
-        border-radius: 10px;
+        aspect-ratio: 3 / 2;
+        border-radius: 12px;
         overflow: hidden;
         background: rgba(0, 0, 0, 0.06);
       }
@@ -180,10 +180,10 @@
       }
       .path {
         font-weight: 600;
-        font-size: 18px;
+        font-size: 19px;
       }
       .share-link {
-        font-size: 13px;
+        font-size: 14px;
         opacity: 0.75;
       }
       .spinner {
@@ -285,10 +285,10 @@
           grid-template-columns: 1fr;
         }
         .card {
-          max-width: 520px;
+          max-width: 600px;
         }
         .path {
-          font-size: 16px;
+          font-size: 17px;
         }
       }
     </style>
@@ -416,7 +416,10 @@
         const grouped = new Map();
         files.forEach((entry) => {
           const parts = entry.path.split("/");
-          const folder = parts.length > 1 ? parts.slice(0, -1).join("/") : "root";
+          const folder = parts.length ? parts[0] : "root";
+          if (folder === "House Championship Final") {
+            return;
+          }
           if (!grouped.has(folder)) {
             grouped.set(folder, []);
           }
@@ -498,7 +501,7 @@
         if (activeFolder !== "all") {
           filtered = filtered.filter((entry) => {
             const parts = entry.path.split("/");
-            const folder = parts.length > 1 ? parts.slice(0, -1).join("/") : "root";
+            const folder = parts.length ? parts[0] : "root";
             return folder === activeFolder;
           });
         }
