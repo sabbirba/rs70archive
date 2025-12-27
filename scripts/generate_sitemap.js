@@ -44,7 +44,7 @@ function buildEntries(baseDir, prefix) {
     const relRoot = relRootRaw === "" ? "" : toPosix(relRootRaw);
     const prefixedRoot = relRoot ? `${prefix}${relRoot}` : prefix;
 
-    if (relRoot && relRoot !== ".") {
+    if (relRoot && relRoot !== "." && !relRoot.includes("/")) {
       entries.push({
         type: "folder",
         path: prefixedRoot,
