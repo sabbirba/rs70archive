@@ -159,13 +159,19 @@
         transform: translateY(-4px);
         box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
       }
+      .preview-frame {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 10px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.06);
+      }
       .preview {
         width: 100%;
-        height: clamp(180px, 24vw, 260px);
-        border-radius: 10px;
+        height: 100%;
         object-fit: cover;
-        background: rgba(0, 0, 0, 0.06);
         cursor: zoom-in;
+        display: block;
       }
       a {
         color: var(--accent);
@@ -382,7 +388,7 @@
           const cards = slice.map((entry) => {
             const url = currentBaseUrl + entry.cdn_path;
             const preview = isPreviewable(entry.ext)
-              ? `<img class=\"preview lazy\" src=\"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=\" data-src=\"${url}\" alt=\"${entry.path}\" loading=\"lazy\" decoding=\"async\" data-full=\"${url}\">`
+              ? `<div class=\"preview-frame\"><img class=\"preview lazy\" src=\"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=\" data-src=\"${url}\" alt=\"${entry.path}\" loading=\"lazy\" decoding=\"async\" data-full=\"${url}\"></div>`
               : "";
             return `
               <div class="card">

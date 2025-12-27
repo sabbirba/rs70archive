@@ -20,6 +20,7 @@ const ROOT_IMAGE_EXTENSIONS = new Set([
   "svg",
   "webp",
 ]);
+const EXCLUDED_DIR_NAMES = new Set(["root", "scripts"]);
 
 function isHidden(name) {
   return name.startsWith(".");
@@ -58,6 +59,9 @@ function buildEntries(baseDir, prefix) {
         continue;
       }
       if (item.name === "node_modules") {
+        continue;
+      }
+      if (item.isDirectory() && EXCLUDED_DIR_NAMES.has(item.name)) {
         continue;
       }
       const absPath = path.join(current, item.name);
