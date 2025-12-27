@@ -1,0 +1,9 @@
+# Query: rsarchive
+# ContextLines: 1
+
+1 result - 1 file
+
+icon.svg:
+  2  <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  3:   <title id="title">rs70archive icon</title>
+  4    <desc id="desc">Rounded tile with rs monogram</desc>

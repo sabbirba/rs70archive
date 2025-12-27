@@ -1,0 +1,13 @@
+{
+  "name": "rs70archive",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run convert:webp && ONLY_WEBP=1 node scripts/generate_sitemap.js",
+    "convert:webp": "node scripts/convert_to_webp.js",
+    "build:assets": "npm run convert:webp && npm run build"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}

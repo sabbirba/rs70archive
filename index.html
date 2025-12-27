@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>rs70archive</title>
+    <meta name="description" content="Static asset catalog served via jsDelivr.">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#f6f2e8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta property="og:title" content="rs70archive">
+    <meta property="og:description" content="Static asset catalog served via jsDelivr.">
+    <meta property="og:image" content="og-image.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="rs70archive">
+    <meta name="twitter:description" content="Static asset catalog served via jsDelivr.">
+    <meta name="twitter:image" content="og-image.png">
+    <style>
+      :root {
+        --bg: #f6f2e8;
+        --ink: #2a2118;
+        --accent: #c66a3d;
+        --card: #fff9ef;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Georgia", "Times New Roman", serif;
+        background: radial-gradient(circle at top, #fff7ea, var(--bg));
+        color: var(--ink);
+      }
+      header {
+        padding: 32px 16px 8px;
+        text-align: center;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(36px, 5vw, 64px);
+        letter-spacing: 1px;
+      }
+      p {
+        margin: 0;
+        opacity: 0.75;
+        font-size: 18px;
+      }
+      main {
+        max-width: 1320px;
+        margin: 20px auto 40px;
+        padding: 0 16px;
+      }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        justify-content: center;
+        margin: 18px 0 24px;
+        font-size: 16px;
+      }
+      .toolbar {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+      }
+      .search {
+        width: min(520px, 100%);
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        background: #fffdf8;
+      }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+      .chip {
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background: #fffdf8;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .chip.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+        justify-items: center;
+      }
+      .section {
+        margin-bottom: 36px;
+      }
+      .section-title {
+        margin: 8px 0 16px;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        display: flex;
+        justify-content: center;
+        margin: 22px 0 0;
+      }
+      .load-more {
+        border: 0;
+        padding: 12px 22px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .load-more:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      footer {
+        padding: 12px 24px 18px;
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.6);
+      }
+      footer a {
+        color: inherit;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 14px;
+        padding: 10px 12px;
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        transition: transform 200ms ease, box-shadow 200ms ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+      }
+      .preview {
+        width: 100%;
+        height: clamp(180px, 24vw, 260px);
+        border-radius: 10px;
+        object-fit: cover;
+        background: rgba(0, 0, 0, 0.06);
+        cursor: zoom-in;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        word-break: break-word;
+      }
+      .path {
+        font-weight: 600;
+        font-size: 18px;
+      }
+      .share-link {
+        font-size: 13px;
+        opacity: 0.75;
+      }
+      .spinner {
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        display: inline-block;
+        animation: spin 900ms linear infinite;
+        margin-right: 8px;
+        vertical-align: middle;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 10, 6, 0.92);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 200ms ease;
+      }
+      .lightbox-frame {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .lightbox img {
+        max-width: min(1200px, 96vw);
+        max-height: 90vh;
+        border-radius: 14px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        cursor: zoom-out;
+        background: #111;
+      }
+      .lightbox .nav {
+        position: absolute;
+        top: 50%;
+        border: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: transparent;
+        color: #111;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        transform: translateY(-50%);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox .prev {
+        left: 16px;
+      }
+      .lightbox .next {
+        right: 16px;
+      }
+      .lightbox .close {
+        top: 14px;
+        right: 14px;
+        transform: none;
+        width: 34px;
+        height: 34px;
+      }
+      .lightbox .nav svg {
+        width: 20px;
+        height: 20px;
+      }
+      .lightbox .nav:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+      @media (max-width: 900px) {
+        main {
+          padding: 0 12px;
+        }
+      }
+      @media (max-width: 640px) {
+        header {
+          padding: 24px 12px 8px;
+        }
+        main {
+          margin: 16px auto 32px;
+          padding: 0 12px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          max-width: 520px;
+        }
+        .path {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>rs70archive</h1>
+      <p>Static asset catalog served via jsDelivr</p>
+      <div class="meta" id="meta"></div>
+      <div class="toolbar">
+        <input class="search" id="search" type="search" placeholder="Search files...">
+        <div class="filters" id="filters"></div>
+      </div>
+    </header>
+    <main>
+      <div id="sections"></div>
+    </main>
+    <footer>
+      <span>© 2025-2026 rs70archive
+      <span> · </span>
+      <span>All rights reserved</span>
+      <span> · </span>
+      <span>Developed by <a href="https://facebook.com/Sabbirba10" target="_blank" rel="noreferrer">Sabbir Bin Abbas</a>.</span>
+    </footer>
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog">
+      <div class="lightbox-frame">
+        <img id="lightbox-img" alt="">
+        <button type="button" class="nav prev" id="lightbox-prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15.5 5.5 9 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button type="button" class="nav next" id="lightbox-next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.5 5.5 15 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button type="button" class="nav close" id="lightbox-close" aria-label="Close image">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <script>
+      const PAGE_SIZE = 12;
+      let allFiles = [];
+      let activeFolder = "all";
+      let lazyObserver = null;
+
+      function isPreviewable(ext) {
+        return ["jpg", "jpeg", "png", "webp", "gif"].includes(ext.toLowerCase());
+      }
+
+      function setupLazyObserver() {
+        if (lazyObserver || !("IntersectionObserver" in window)) {
+          return;
+        }
+        lazyObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+            const img = entry.target;
+            const src = img.dataset.src;
+            if (src) {
+              img.src = src;
+              img.removeAttribute("data-src");
+            }
+            img.classList.remove("lazy");
+            observer.unobserve(img);
+          });
+        }, { rootMargin: "200px 0px" });
+      }
+
+      function observeLazyImages(root = document) {
+        setupLazyObserver();
+        const images = root.querySelectorAll("img.preview.lazy[data-src]");
+        if (!lazyObserver) {
+          images.forEach((img) => {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+            img.classList.remove("lazy");
+          });
+          return;
+        }
+        images.forEach((img) => lazyObserver.observe(img));
+      }
+
+      function renderMore(group, grid, button, state) {
+        const slice = group.slice(state.rendered, state.rendered + PAGE_SIZE);
+
+        button.disabled = true;
+        button.innerHTML = "<span class=\"spinner\"></span>Loading";
+
+        setTimeout(() => {
+          const cards = slice.map((entry) => {
+            const url = currentBaseUrl + entry.cdn_path;
+            const preview = isPreviewable(entry.ext)
+              ? `<img class=\"preview lazy\" src=\"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=\" data-src=\"${url}\" alt=\"${entry.path}\" loading=\"lazy\" decoding=\"async\" data-full=\"${url}\">`
+              : "";
+            return `
+              <div class="card">
+                ${preview}
+                <div class="path">${entry.path}</div>
+                <a class="share-link" href="${url}" target="_blank" rel="noreferrer">${url}</a>
+              </div>
+            `;
+          }).join("");
+
+          grid.insertAdjacentHTML("beforeend", cards);
+          observeLazyImages(grid);
+          state.rendered += slice.length;
+          button.disabled = false;
+
+          if (state.rendered >= group.length) {
+            button.style.display = "none";
+          } else {
+            button.textContent = "Load more";
+          }
+        }, 250);
+      }
+
+      function groupByFolder(files) {
+        const grouped = new Map();
+        files.forEach((entry) => {
+          const parts = entry.path.split("/");
+          const folder = parts.length > 1 ? parts.slice(0, -1).join("/") : "root";
+          if (!grouped.has(folder)) {
+            grouped.set(folder, []);
+          }
+          grouped.get(folder).push(entry);
+        });
+        return grouped;
+      }
+
+      function renderFilters(folders) {
+        const filters = document.getElementById("filters");
+        filters.innerHTML = "";
+
+        const allButton = document.createElement("button");
+        allButton.className = `chip${activeFolder === "all" ? " active" : ""}`;
+        allButton.textContent = "All";
+        allButton.addEventListener("click", () => {
+          activeFolder = "all";
+          updateFilters();
+          applyFilters();
+        });
+        filters.appendChild(allButton);
+
+        folders.forEach((folder) => {
+          const button = document.createElement("button");
+          button.className = `chip${activeFolder === folder ? " active" : ""}`;
+          button.textContent = folder;
+          button.addEventListener("click", () => {
+            activeFolder = folder;
+            updateFilters();
+            applyFilters();
+          });
+          filters.appendChild(button);
+        });
+      }
+
+      function updateFilters() {
+        const buttons = document.querySelectorAll(".chip");
+        buttons.forEach((button) => {
+          const label = button.textContent;
+          const isAll = label === "All";
+          const isActive = isAll ? activeFolder === "all" : label === activeFolder;
+          button.classList.toggle("active", isActive);
+        });
+      }
+
+      function renderSections(files) {
+        const grouped = groupByFolder(files);
+        const sections = document.getElementById("sections");
+        sections.innerHTML = "";
+
+        Array.from(grouped.keys()).sort().forEach((folder) => {
+          const group = grouped.get(folder);
+          const section = document.createElement("section");
+          section.className = "section";
+          section.innerHTML = `
+            <h2 class="section-title">${folder}</h2>
+            <div class="grid"></div>
+            <div class="controls">
+              <button class="load-more">Load more</button>
+            </div>
+          `;
+          const grid = section.querySelector(".grid");
+          const button = section.querySelector(".load-more");
+          const state = { rendered: 0 };
+          button.addEventListener("click", () => renderMore(group, grid, button, state));
+          sections.appendChild(section);
+
+          if (group.length <= PAGE_SIZE) {
+            button.style.display = "none";
+          }
+          renderMore(group, grid, button, state);
+        });
+      }
+
+      function applyFilters() {
+        const searchValue = document.getElementById("search").value.trim().toLowerCase();
+        let filtered = allFiles;
+
+        if (activeFolder !== "all") {
+          filtered = filtered.filter((entry) => {
+            const parts = entry.path.split("/");
+            const folder = parts.length > 1 ? parts.slice(0, -1).join("/") : "root";
+            return folder === activeFolder;
+          });
+        }
+
+        if (searchValue) {
+          filtered = filtered.filter((entry) => entry.path.toLowerCase().includes(searchValue));
+        }
+
+        renderSections(filtered);
+      }
+
+      let currentBaseUrl = "";
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxPrev = document.getElementById("lightbox-prev");
+      const lightboxNext = document.getElementById("lightbox-next");
+      const lightboxClose = document.getElementById("lightbox-close");
+      let currentPreviewList = [];
+      let currentPreviewIndex = -1;
+
+      function buildPreviewList() {
+        return allFiles
+          .filter((entry) => isPreviewable(entry.ext))
+          .map((entry) => {
+            const src = currentBaseUrl + entry.cdn_path;
+            return { src, alt: entry.path };
+          });
+      }
+
+      function syncNavButtons() {
+        const maxIndex = currentPreviewList.length - 1;
+        lightboxPrev.disabled = currentPreviewIndex <= 0;
+        lightboxNext.disabled = currentPreviewIndex >= maxIndex;
+      }
+
+      function setLightboxImage(index) {
+        if (!currentPreviewList.length) {
+          return;
+        }
+        const safeIndex = Math.min(Math.max(index, 0), currentPreviewList.length - 1);
+        currentPreviewIndex = safeIndex;
+        const entry = currentPreviewList[safeIndex];
+        lightboxImg.src = entry.src;
+        lightboxImg.alt = entry.alt;
+        syncNavButtons();
+      }
+
+      function openLightbox(src, alt) {
+        currentPreviewList = buildPreviewList();
+        const matchIndex = currentPreviewList.findIndex((entry) => entry.src === src);
+        currentPreviewIndex = matchIndex === -1 ? 0 : matchIndex;
+        if (currentPreviewList.length === 0) {
+          currentPreviewList = [{ src, alt: alt || "" }];
+          currentPreviewIndex = 0;
+        }
+        setLightboxImage(currentPreviewIndex);
+        lightbox.classList.add("open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+        lightboxImg.alt = "";
+        document.body.style.overflow = "";
+      }
+
+      function navigateLightbox(step) {
+        const nextIndex = currentPreviewIndex + step;
+        if (nextIndex < 0 || nextIndex >= currentPreviewList.length) {
+          return;
+        }
+        setLightboxImage(nextIndex);
+      }
+
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target instanceof HTMLImageElement && target.classList.contains("preview")) {
+          openLightbox(target.dataset.full || target.src, target.alt);
+        }
+      });
+
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox || event.target === lightboxImg) {
+          closeLightbox();
+        }
+      });
+
+      lightboxPrev.addEventListener("click", (event) => {
+        event.stopPropagation();
+        navigateLightbox(-1);
+      });
+      lightboxNext.addEventListener("click", (event) => {
+        event.stopPropagation();
+        navigateLightbox(1);
+      });
+      lightboxClose.addEventListener("click", (event) => {
+        event.stopPropagation();
+        closeLightbox();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.classList.contains("open")) {
+          closeLightbox();
+        }
+        if (lightbox.classList.contains("open") && event.key === "ArrowLeft") {
+          navigateLightbox(-1);
+        }
+        if (lightbox.classList.contains("open") && event.key === "ArrowRight") {
+          navigateLightbox(1);
+        }
+      });
+
+      async function load() {
+        const res = await fetch("sitemap.json");
+        const data = await res.json();
+        currentBaseUrl = data.base_url;
+        const meta = document.getElementById("meta");
+        meta.innerHTML = `
+          <span>Folders: ${data.stats.folders}</span>
+          <span>Files: ${data.stats.files}</span>
+          <span>Total: ${(data.stats.total_bytes / (1024 * 1024)).toFixed(2)} MB</span>
+        `;
+
+        allFiles = data.entries.filter((entry) => entry.type === "file");
+        const folders = Array.from(groupByFolder(allFiles).keys()).sort();
+        renderFilters(folders);
+        document.getElementById("search").addEventListener("input", applyFilters);
+        applyFilters();
+      }
+
+      load();
+    </script>
+  </body>
+</html>
