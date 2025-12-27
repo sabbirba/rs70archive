@@ -2,12 +2,12 @@
   "developer": "Sabbir Bin Abbas",
   "devemail": "mail@sabbirba.com",
   "devfb": "https://www.facebook.com/Sabbirba10",
-  "generated_at": "2025-12-27T09:56:40.348Z",
+  "generated_at": "2025-12-27T09:57:48.847Z",
   "base_url": "https://cdn.jsdelivr.net/gh/sabbirba/rs70archive@main/",
   "stats": {
     "folders": 45,
-    "files": 3865,
-    "total_bytes": 21377965021
+    "files": 3854,
+    "total_bytes": 21319131244
   },
   "entries": [
     {
@@ -8055,20 +8055,6 @@
     },
     {
       "type": "file",
-      "path": "House Championship/24-11-25/20251124_182945(1).jpg",
-      "bytes": 4119497,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/24-11-25/20251124_182945(1).jpg"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/24-11-25/20251124_182945(1).webp",
-      "bytes": 142212,
-      "ext": "webp",
-      "cdn_path": "House%20Championship/24-11-25/20251124_182945(1).webp"
-    },
-    {
-      "type": "file",
       "path": "House Championship/24-11-25/20251124_183113.jpg",
       "bytes": 4440015,
       "ext": "jpg",
@@ -15923,20 +15909,6 @@
     },
     {
       "type": "file",
-      "path": "House Championship/27-10-25/Sumaiya Rahman/20251027_163514(0).jpg",
-      "bytes": 2445024,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/27-10-25/Sumaiya%20Rahman/20251027_163514(0).jpg"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/27-10-25/Sumaiya Rahman/20251027_163514(0).webp",
-      "bytes": 123274,
-      "ext": "webp",
-      "cdn_path": "House%20Championship/27-10-25/Sumaiya%20Rahman/20251027_163514(0).webp"
-    },
-    {
-      "type": "file",
       "path": "House Championship/27-10-25/Sumaiya Rahman/20251027_163515.jpg",
       "bytes": 2765611,
       "ext": "jpg",
@@ -16074,20 +16046,6 @@
       "bytes": 203662,
       "ext": "webp",
       "cdn_path": "House%20Championship/27-10-25/Sumaiya%20Rahman/20251027_163646.webp"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/27-10-25/Sumaiya Rahman/20251027_163646(0).jpg",
-      "bytes": 3705943,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/27-10-25/Sumaiya%20Rahman/20251027_163646(0).jpg"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/27-10-25/Sumaiya Rahman/20251027_163646(0).webp",
-      "bytes": 198080,
-      "ext": "webp",
-      "cdn_path": "House%20Championship/27-10-25/Sumaiya%20Rahman/20251027_163646(0).webp"
     },
     {
       "type": "file",
@@ -18548,13 +18506,6 @@
     },
     {
       "type": "file",
-      "path": "House Championship/29-10-25/Sumaiya Rahman/20251029_175703(1).jpg",
-      "bytes": 4429218,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/29-10-25/Sumaiya%20Rahman/20251029_175703(1).jpg"
-    },
-    {
-      "type": "file",
       "path": "House Championship/29-10-25/Sumaiya Rahman/20251029_175734.jpg",
       "bytes": 4218235,
       "ext": "jpg",
@@ -19336,13 +19287,6 @@
       "bytes": 4121306,
       "ext": "jpg",
       "cdn_path": "House%20Championship/30-10-25/Sumaiya%20Rahman%20/20251030_165834.jpg"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/30-10-25/Sumaiya Rahman /20251030_165834(0).jpg",
-      "bytes": 3944005,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/30-10-25/Sumaiya%20Rahman%20/20251030_165834(0).jpg"
     },
     {
       "type": "file",
@@ -21471,13 +21415,6 @@
       "bytes": 4166057,
       "ext": "jpg",
       "cdn_path": "House%20Championship/6-11-25/Sumaiya%20Rahman/20251106_163421.jpg"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/6-11-25/Sumaiya Rahman/20251106_163421(1).jpg",
-      "bytes": 4166057,
-      "ext": "jpg",
-      "cdn_path": "House%20Championship/6-11-25/Sumaiya%20Rahman/20251106_163421(1).jpg"
     },
     {
       "type": "file",
@@ -26353,13 +26290,6 @@
     },
     {
       "type": "file",
-      "path": "House Championship/Tasmiah Tabassum /DSC08677(1).JPG",
-      "bytes": 18046976,
-      "ext": "JPG",
-      "cdn_path": "House%20Championship/Tasmiah%20Tabassum%20/DSC08677(1).JPG"
-    },
-    {
-      "type": "file",
       "path": "House Championship/Tasmiah Tabassum /DSC08681.JPG",
       "bytes": 15733452,
       "ext": "JPG",
@@ -26532,13 +26462,6 @@
       "bytes": 17513491,
       "ext": "JPG",
       "cdn_path": "House%20Championship/Tasmiah%20Tabassum%20/DSC09001.JPG"
-    },
-    {
-      "type": "file",
-      "path": "House Championship/Tasmiah Tabassum /DSC09001(1).JPG",
-      "bytes": 17513491,
-      "ext": "JPG",
-      "cdn_path": "House%20Championship/Tasmiah%20Tabassum%20/DSC09001(1).JPG"
     },
     {
       "type": "file",
